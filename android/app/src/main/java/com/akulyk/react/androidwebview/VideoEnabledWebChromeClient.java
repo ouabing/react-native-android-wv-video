@@ -11,6 +11,11 @@ import android.widget.FrameLayout;
 
 import static android.view.ViewGroup.LayoutParams;
 
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+
 /**
  * Provides support for full-screen video on Android
  */
@@ -24,10 +29,12 @@ public class VideoEnabledWebChromeClient extends WebChromeClient {
     private Activity mActivity;
     private View mWebView;
     private View mVideoView;
+    private ReactContext mContext;
 
-    public VideoEnabledWebChromeClient(Activity activity, WebView webView) {
+    public VideoEnabledWebChromeClient(ReactContext context, WebView webView) {
         mWebView = webView;
-        mActivity = activity;
+        mContext = context;
+        mActivity = context.getCurrentActivity();
     }
 
     @Override
@@ -46,6 +53,10 @@ public class VideoEnabledWebChromeClient extends WebChromeClient {
         getRootView().addView(view, FULLSCREEN_LAYOUT_PARAMS);
 
         mWebView.setVisibility(View.GONE);
+
+        WritableMap eventData = Arguments.createMap();
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("WebViewPlayVideoFullScreenStart", eventData);
     }
 
     @Override
@@ -62,6 +73,10 @@ public class VideoEnabledWebChromeClient extends WebChromeClient {
         mCustomViewCallback.onCustomViewHidden();
 
         mWebView.setVisibility(View.VISIBLE);
+
+        WritableMap eventData = Arguments.createMap();
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("WebViewPlayVideoFullScreenEnd", eventData);
     }
 
     private ViewGroup getRootView() {
