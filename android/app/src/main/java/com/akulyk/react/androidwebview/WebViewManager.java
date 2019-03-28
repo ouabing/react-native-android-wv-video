@@ -517,7 +517,9 @@ public class WebViewManager extends SimpleViewManager<WebView> {
                 break;
             case COMMAND_EXIT_FULL_SCREEN:
                 ReactWebViewClient client = ((WebViewManager.ReactWebView) root).getReactWebViewClient();
-                client && client.onHideCustomView()
+                if (client) {
+                  client.onHideCustomView();
+                }
                 break;
         }
     }
