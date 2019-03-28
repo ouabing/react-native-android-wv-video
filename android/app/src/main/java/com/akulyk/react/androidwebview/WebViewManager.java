@@ -58,6 +58,7 @@ public class WebViewManager extends SimpleViewManager<WebView> {
     public static final int COMMAND_STOP_LOADING = 4;
     public static final int COMMAND_POST_MESSAGE = 5;
     public static final int COMMAND_INJECT_JAVASCRIPT = 6;
+    public static final int COMMAND_EXIT_FULL_SCREEN = 7;
 
     // Use `webView.loadUrl("about:blank")` to reliably reset the view
     // state and release page resources (including any running JavaScript).
@@ -472,7 +473,8 @@ public class WebViewManager extends SimpleViewManager<WebView> {
                 "reload", COMMAND_RELOAD,
                 "stopLoading", COMMAND_STOP_LOADING,
                 "postMessage", COMMAND_POST_MESSAGE,
-                "injectJavaScript", COMMAND_INJECT_JAVASCRIPT
+                "injectJavaScript", COMMAND_INJECT_JAVASCRIPT,
+                "exitFullScreen", COMMAND_EXIT_FULL_SCREEN
         );
     }
 
@@ -512,6 +514,10 @@ public class WebViewManager extends SimpleViewManager<WebView> {
                 break;
             case COMMAND_INJECT_JAVASCRIPT:
                 root.loadUrl("javascript:" + args.getString(0));
+                break;
+            case COMMAND_EXIT_FULL_SCREEN:
+                ReactWebViewClient client = ((WebViewManager.ReactWebView) root).getReactWebViewClient();
+                client && client.onHideCustomView()
                 break;
         }
     }
