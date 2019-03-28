@@ -204,6 +204,14 @@ class WebView extends React.Component {
         );
     };
 
+    exitFullScreen = () => {
+        UIManager.dispatchViewManagerCommand(
+            this.getWebViewHandle(),
+            UIManager.RNAndroidWebView.Commands.exitFullScreen,
+            null
+        );
+    };
+
     stopLoading = () => {
         UIManager.dispatchViewManagerCommand(
             this.getWebViewHandle(),

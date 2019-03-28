@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.ViewGroup.LayoutParams;
 import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.JavascriptInterface;
@@ -516,9 +517,11 @@ public class WebViewManager extends SimpleViewManager<WebView> {
                 root.loadUrl("javascript:" + args.getString(0));
                 break;
             case COMMAND_EXIT_FULL_SCREEN:
-                ReactWebViewClient client = ((WebViewManager.ReactWebView) root).getReactWebViewClient();
-                if (client) {
-                  client.onHideCustomView();
+                if (Build.VERSION.SDK_INT >= 26) {
+                    WebChromeClient client = root.getWebChromeClient();
+                    if (client != null) {
+                        client.onHideCustomView();
+                    }
                 }
                 break;
         }
