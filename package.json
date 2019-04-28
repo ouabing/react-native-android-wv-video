@@ -1,6 +1,6 @@
 {
   "name": "react-native-android-wv-video",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Android WebView supporting playing HTML5 videos in fullscreen",
   "main": "index.js",
   "peerDependencies": {
