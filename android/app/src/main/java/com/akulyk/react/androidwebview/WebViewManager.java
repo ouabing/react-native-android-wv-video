@@ -353,7 +353,9 @@ public class WebViewManager extends SimpleViewManager<WebView> {
 
     @ReactProp(name = "mediaPlaybackRequiresUserAction")
     public void setMediaPlaybackRequiresUserAction(WebView view, boolean requires) {
-        view.getSettings().setMediaPlaybackRequiresUserGesture(requires);
+        if (Build.VERSION.SDK_INT >= 17) {
+            view.getSettings().setMediaPlaybackRequiresUserGesture(requires);
+        }
     }
 
     @ReactProp(name = "allowUniversalAccessFromFileURLs")
