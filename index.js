@@ -85,13 +85,15 @@ class WebView extends React.Component {
         ]),
         saveFormDataDisabled: PropTypes.bool,
         urlPrefixesForDefaultIntent: PropTypes.arrayOf(PropTypes.string),
+        androidHardwareAccelerationDisabled: PropTypes.bool,
     };
 
     static defaultProps = {
         javaScriptEnabled : true,
         thirdPartyCookiesEnabled: true,
         scalesPageToFit: true,
-        saveFormDataDisabled: false
+        saveFormDataDisabled: false,
+        androidHardwareAccelerationDisabled: false,
     };
 
     state = {
@@ -167,6 +169,7 @@ class WebView extends React.Component {
                 mixedContentMode={this.props.mixedContentMode}
                 saveFormDataDisabled={this.props.saveFormDataDisabled}
                 urlPrefixesForDefaultIntent={this.props.urlPrefixesForDefaultIntent}
+                androidHardwareAccelerationDisabled={this.props.androidHardwareAccelerationDisabled}
             />;
 
         return (
