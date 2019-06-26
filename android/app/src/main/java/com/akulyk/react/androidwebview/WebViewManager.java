@@ -10,6 +10,7 @@ import java.util.Map;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions;
