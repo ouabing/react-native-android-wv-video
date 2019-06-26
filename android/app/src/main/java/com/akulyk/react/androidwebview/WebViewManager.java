@@ -343,6 +343,15 @@ public class WebViewManager extends SimpleViewManager<WebView> {
         view.getSettings().setDomStorageEnabled(enabled);
     }
 
+    @ReactProp(name = "androidHardwareAccelerationDisabled")
+    public void setHardwareAccelerationDisabled(WebView view, boolean disabled) {
+      if (disabled) {
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+      } else {
+        view.setLayerType(View.LAYER_TYPE_NONE, null);
+      }
+    }
+
     @ReactProp(name = "userAgent")
     public void setUserAgent(WebView view, @Nullable String userAgent) {
         if (userAgent != null) {
